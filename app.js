@@ -107,3 +107,30 @@ const LinkedList = () => {
 const Node = (value) => {
   return { value, nextNode: null };
 };
+
+const list = LinkedList();
+
+const test = () => {
+  console.log(list.toString());
+  console.log(list.contains("C"));
+  console.log(list.find("C"));
+  console.log(list.at(2));
+};
+
+test();
+list.append("C");
+test();
+list.append("D");
+test();
+list.append("E");
+test();
+list.prepend("B");
+test();
+list.prepend("A");
+test();
+list.pop();
+test();
+list.pop();
+test();
+list.pop();
+test();
