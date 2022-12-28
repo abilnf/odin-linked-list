@@ -85,8 +85,59 @@ const LinkedList = () => {
     }
     return string + "null";
   };
-  const insertAt = (value, index) => {};
-  const removeAt = (index) => {};
+  const insertAt = (value, index) => {
+    const insert = Node(value);
+    if (index === 0) {
+      if (TAIL === null) {
+        TAIL = insert;
+      } else {
+        insert.nextNode = HEAD;
+      }
+      HEAD = insert;
+    } else {
+      let count = 0;
+      let node = HEAD;
+      while (node) {
+        count++;
+        if (count === index) {
+          insert.nextNode = node.nextNode;
+          node.nextNode = insert;
+          if (insert.nextNode === TAIL) {
+            TAIL = insert;
+          }
+          return;
+        }
+        node = node.nextNode;
+      }
+      throw `OutOfBoundsError - LinkedList out of bounds! (${index})`;
+    }
+  };
+  const removeAt = (index) => {
+    if (index === 0) {
+      if (TAIL === HEAD) {
+        TAIL = null;
+      }
+      HEAD = HEAD.nextNode;
+    } else {
+      let count = 0;
+      let node = HEAD;
+      while (node) {
+        count++;
+        if (count === index) {
+          if (!node.nextNode) {
+            break;
+          }
+          node.nextNode = node.nextNode.nextNode;
+          if (!node.nextNode) {
+            TAIL = node;
+          }
+          return;
+        }
+        node = node.nextNode;
+      }
+      throw `OutOfBoundsError - LinkedList out of bounds! (${index})`;
+    }
+  };
 
   return {
     append,
